@@ -9,17 +9,26 @@ public class CarController : MonoBehaviourPun
 
     public float speed = 10f; // Variável pública que define a velocidade do carro.
     public float turnSpeed = 5f; // Variável pública que define a velocidade de rotação do carro.
-
+    Rigidbody rb;
     private PhotonView photonView; // Cria uma referência para o PhotonView, usado para verificar a propriedade do objeto.
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         photonView = GetComponent<PhotonView>(); // Inicializa o PhotonView ao iniciar o jogo.
     }
 
     void Update()
     {
-        if (photonView.IsMine) // Verifica se este carro pertence ao jogador local.
+        if (photonView.IsMine)
+        {
+            Move();
+        }
+    }
+
+    void Move()
+    {
+         // Verifica se este carro pertence ao jogador local.
         {
             float move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
             // Captura o input vertical (teclas W/S ou setas) para movimentar o carro.
@@ -27,9 +36,15 @@ public class CarController : MonoBehaviourPun
             float turn = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
             // Captura o input horizontal (teclas A/D ou setas) para girar o carro.
 
-            transform.Translate(0, 0, move); // Move o carro para frente ou para trás com base no input.
-            transform.Rotate(0, turn, 0); // Rotaciona o carro com base no input de rotação.
+            //transform.Translate(0, 0, move); // Move o carro para frente ou para trás com base no input.
+            //transform.Rotate(0, turn, 0); // Rotaciona o carro com base no input de rotação.
         }
+    }
+    [PunRPC]
+    void moveRPC(float horizontal, float vertical)
+    {
+        Vector2 movement = new Vector2(horizontal, vertical);
+        rb.velocity = movement * speed;
     }
 
     // Função responsável por enviar e receber dados de rede.
