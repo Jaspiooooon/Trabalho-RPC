@@ -36,8 +36,9 @@ public class CarController : MonoBehaviourPun
             float turn = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
             // Captura o input horizontal (teclas A/D ou setas) para girar o carro.
 
-            //transform.Translate(0, 0, move); // Move o carro para frente ou para trás com base no input.
-            //transform.Rotate(0, turn, 0); // Rotaciona o carro com base no input de rotação.
+            transform.Translate(0, 0, move); // Move o carro para frente ou para trás com base no input.
+            transform.Rotate(0, turn, 0); // Rotaciona o carro com base no input de rotação.
+            photonView.RPC("MuveRPC", RpcTarget.All, move, turn);
         }
     }
     [PunRPC]
