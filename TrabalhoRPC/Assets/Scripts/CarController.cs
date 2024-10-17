@@ -2,65 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class CarController : MonoBehaviourPun
+
+
+public class CarController : MonoBehaviour
 {
-
-
-    public float speed = 10f; // Variável pública que define a velocidade do carro.
-    public float turnSpeed = 5f; // Variável pública que define a velocidade de rotação do carro.
-    Rigidbody rb;
-    private PhotonView photonView; // Cria uma referência para o PhotonView, usado para verificar a propriedade do objeto.
-
+    float turnSpeed = 6.0f;
+    public float moveSpeed = 5f;  // Velocidade de movimento
+    private Rigidbody2D rb;       // Referência ao Rigidbody2D
+    private Vector2 movement;     // Direção do movimento
+    public float maxSpeed = 20f;  // Velocidade máxima
+    public float acceleration = 5f;  // Aceleração do carro
+    public float deceleration = 10f;  // Taxa de desaceleração quando não estiver acelerando
+    private float currentSpeed = 0f;  // Velocidade atual
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        photonView = GetComponent<PhotonView>(); // Inicializa o PhotonView ao iniciar o jogo.
+        // Pegando a referência do Rigidbody2D do objeto
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (photonView.IsMine)
-        {
-            Move();
-        }
+        // Capturando o input do eixo Horizontal e Vertical
+        movement.x = Input.GetAxis("Horizontal");  // Para os lados
+        movement.y = Mathf.Clamp(Input.GetAxis("Vertical"), 0, 1);
     }
 
-    void Move()
+    void FixedUpdate()
     {
-         // Verifica se este carro pertence ao jogador local.
+        if (movement.y > 0)
         {
-            float move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
-            // Captura o input vertical (teclas W/S ou setas) para movimentar o carro.
-
-            float turn = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
-            // Captura o input horizontal (teclas A/D ou setas) para girar o carro.
-
-            transform.Translate(move, 0, 0 ); // Move o carro para frente ou para trás com base no input.
-            transform.Rotate(0, turn, 0); // Rotaciona o carro com base no input de rotação.
-            photonView.RPC("moveRPC", RpcTarget.All, move, turn);
+            // Acelera gradativamente até o máximo
+            currentSpeed += acceleration * Time.fixedDeltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0f, maxSpeed);  // Limita a velocidade ao máximo permitido
         }
-    }
-    [PunRPC]
-    void moveRPC(float horizontal, float vertical)
-    {
-        Vector2 movement = new Vector2(horizontal, vertical);
-        rb.velocity = movement * speed;
-    }
-
-    // Função responsável por enviar e receber dados de rede.
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting) // Se este é o cliente local, envie dados.
+        else
         {
-            stream.SendNext(transform.position); // Envia a posição do carro para outros jogadores.
-            stream.SendNext(transform.rotation); // Envia a rotação do carro para outros jogadores.
+            // Desaceleração gradativa quando não estiver acelerando
+            currentSpeed -= deceleration * Time.fixedDeltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0f, maxSpeed);  // Garante que não fique negativo
         }
-        else // Se este é o cliente remoto, receba dados.
-        {
-            transform.position = (Vector3)stream.ReceiveNext(); // Recebe e atualiza a posição do carro.
-            transform.rotation = (Quaternion)stream.ReceiveNext(); // Recebe e atualiza a rotação do carro.
-        }
+        // Movendo o carro para frente
+        rb.MovePosition(rb.position + (Vector2)(transform.up * movement.y * moveSpeed * Time.deltaTime));
+
+        // Rotacionando o carro
+        rb.MoveRotation(rb.rotation - movement.x * turnSpeed * Time.fixedDeltaTime);  // Gira de acordo com o input horizontal
+
+       
+        
+
     }
 }
+
+
+
+
+
 
