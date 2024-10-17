@@ -8,8 +8,8 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class CarController : MonoBehaviour
 {
-    float turnSpeed = 6.0f;
-    public float moveSpeed = 5f;  // Velocidade de movimento
+    float turnSpeed = 50f;
+    public float moveSpeed = 10f;  // Velocidade de movimento
     private Rigidbody2D rb;       // Referência ao Rigidbody2D
     private Vector2 movement;     // Direção do movimento
     public float maxSpeed = 20f;  // Velocidade máxima
@@ -26,7 +26,7 @@ public class CarController : MonoBehaviour
     {
         // Capturando o input do eixo Horizontal e Vertical
         movement.x = Input.GetAxis("Horizontal");  // Para os lados
-        movement.y = Mathf.Clamp(Input.GetAxis("Vertical"), 0, 1);
+        movement.y = Mathf.Clamp(Input.GetAxis("Vertical"), -1, 1);
     }
 
     void FixedUpdate()
@@ -37,14 +37,14 @@ public class CarController : MonoBehaviour
             currentSpeed += acceleration * Time.fixedDeltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, maxSpeed);  // Limita a velocidade ao máximo permitido
         }
-        else
+        else if(movement.y < 0)
         {
             // Desaceleração gradativa quando não estiver acelerando
             currentSpeed -= deceleration * Time.fixedDeltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0f, maxSpeed);  // Garante que não fique negativo
         }
         // Movendo o carro para frente
-        rb.MovePosition(rb.position + (Vector2)(transform.up * movement.y * moveSpeed * Time.deltaTime));
+        rb.MovePosition(rb.position + (Vector2)(transform.up * currentSpeed * Time.deltaTime));
 
         // Rotacionando o carro
         rb.MoveRotation(rb.rotation - movement.x * turnSpeed * Time.fixedDeltaTime);  // Gira de acordo com o input horizontal
