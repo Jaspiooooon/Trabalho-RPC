@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun; // Importa Photon para funcionalidades de multiplayer.
 
-public class MultiplayerSetup : MonoBehaviourPunCallbacks // Define a classe para gerenciar o setup do multiplayer.
+public class SpawnCar : MonoBehaviourPunCallbacks // Define a classe para gerenciar o setup do multiplayer.
 {
     public GameObject carPrefab; // Referência ao prefab do carro que será instanciado.
 
