@@ -1555,6 +1555,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &623455021 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5852454611239481787, guid: 074c51fdc7cd706468a96f5fbab92a0b, type: 3}
+  m_PrefabInstance: {fileID: 4228597664270599073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &682625983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1844,7 +1849,23 @@ EdgeCollider2D:
   - {x: 9.2642355, y: 21.901339}
   - {x: 11.289228, y: 20.632345}
   - {x: 12.088114, y: 18.564503}
-  - {x: 12.168062, y: 3.3760357}
+  - {x: 12.035007, y: 4.5114856}
+  - {x: 12.759686, y: 1.8424759}
+  - {x: 13.989091, y: -0.117827415}
+  - {x: 15.390966, y: -1.3569689}
+  - {x: 16.811405, y: -2.301691}
+  - {x: 18.480175, y: -3.0220914}
+  - {x: 20.752789, y: -3.5731764}
+  - {x: 23.221771, y: -3.5403519}
+  - {x: 26.136505, y: -2.645979}
+  - {x: 28.795166, y: -0.87560797}
+  - {x: 30.652702, y: 1.386168}
+  - {x: 31.61236, y: 4.530459}
+  - {x: 31.570568, y: 43.921745}
+  - {x: 30.461054, y: 47.15174}
+  - {x: 27.200575, y: 50.43092}
+  - {x: 22.59552, y: 51.93174}
+  - {x: 6.280094, y: 51.854862}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -3565,7 +3586,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 623455021}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
