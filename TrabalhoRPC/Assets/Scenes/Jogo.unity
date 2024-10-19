@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 1936392478397754222, guid: 074c51fdc7cd706468a96f5fbab92a0b, type: 3}
   spawnPoint: {fileID: 32547101}
-  virtualCamera: {fileID: 0}
+  virtualCamera: {fileID: 1657916255}
 --- !u!4 &25680390
 Transform:
   m_ObjectHideFlags: 0
