@@ -462,7 +462,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44.75
+  m_fontSize: 39.7
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   roomListText: {fileID: 2003622941}
   maxPlayers: 4
   statusText: {fileID: 1328646291}
-  roomButtonPrefab: {fileID: 4115010439323071070, guid: 0591154f27c13db4b8341e2691b61639, type: 3}
+  roomButtonPrefab: {fileID: 3087337975567410204, guid: a01b4c5a54288ee47b48ac2524d0bb76, type: 3}
   roomListContainer: {fileID: 199277835}
 --- !u!4 &1762565531
 Transform:
@@ -1993,7 +1993,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1762565530}
         m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: JoinRoom
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

@@ -79,7 +79,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
         
     }
-    [PunRPC]
+    
     public override void OnJoinedRoom()
     {
         statusText.text = "Entrando na sala " + PhotonNetwork.CurrentRoom.Name;
