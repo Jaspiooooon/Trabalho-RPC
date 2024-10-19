@@ -1,3 +1,4 @@
+using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,10 +6,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
     public GameObject carPrefab;  // Referência ao prefab do carro (deve estar na pasta "Resources")
     public Transform spawnPoint;  // Ponto onde o carro vai aparecer
+    public CinemachineVirtualCamera virtualCamera;
+
+
+
+
     #region
     // Instância estática do GameManager
     public static GameManager instance;
@@ -28,9 +34,9 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-    
-    
 
+
+    [PunRPC]
     void Start()
     {
         if (PhotonNetwork.IsConnected)  // Verifica se está conectado à Photon Network
@@ -38,7 +44,11 @@ public class GameManager : MonoBehaviour
             if (PhotonNetwork.IsMasterClient)  // Apenas o Master Client cria o carro
             {
                 // Instancia o carro via PhotonNetwork, sincronizando para todos os jogadores
-                PhotonNetwork.Instantiate(carPrefab.name, spawnPoint.position, spawnPoint.rotation);
+                PhotonNetwork.Instantiate(carPrefab.name, (Vector2)spawnPoint.position, spawnPoint.rotation);
+                // Atualiza a Cinemachine para seguir o carro instanciado
+                virtualCamera.Follow = carPrefab.transform;
+                virtualCamera.LookAt = carPrefab.transform.Find("LookAtPoint"); 
+                
             }
         }
         else
@@ -47,6 +57,8 @@ public class GameManager : MonoBehaviour
             Instantiate(carPrefab, spawnPoint.position, spawnPoint.rotation);
         }
     }
+    
+        
 
 public void carregarLobby()
     {
