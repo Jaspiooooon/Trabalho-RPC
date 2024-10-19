@@ -83,7 +83,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         statusText.text = "Entrando na sala " + PhotonNetwork.CurrentRoom.Name;
-        PhotonNetwork.LoadLevel("Jogo"); // Carrega a cena de espera
+        PhotonNetwork.LoadLevel("Jogo"); // Carrega a cena do jogo
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
