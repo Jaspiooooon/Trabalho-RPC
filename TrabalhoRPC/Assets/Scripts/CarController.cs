@@ -13,10 +13,10 @@ public class CarController : MonoBehaviour
     public float deceleration = 10f;// Taxa de desaceleração
     private float currentSpeed = 0f;// Velocidade atual
     private CinemachineVirtualCamera cineMachineCam;
-    private PhotonView photonView;
+    public PhotonView photonView;
     private Vector2 networkPosition; // Para armazenar a posição recebida pela rede
     private float networkRotation;   // Para armazenar a rotação recebida pela rede
-
+    
     void Start()
     {
         // Pegando a referência do Rigidbody2D do objeto
@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
             }
         }
     }
+    
 
     void Update()
     {
