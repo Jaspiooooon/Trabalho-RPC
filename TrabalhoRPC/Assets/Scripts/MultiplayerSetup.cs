@@ -37,7 +37,7 @@ public class SpawnManager : MonoBehaviourPunCallbacks
         int spawnIndex = GetRandomSpawnPoint();
         Vector3 spawnPosition = spawnPoints[spawnIndex].position;
 
-        GameObject player = PhotonNetwork.Instantiate("PlayerPrefab", spawnPosition, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate("carPrefab", spawnPosition, Quaternion.identity);
 
         if (player.GetComponent<PhotonView>().IsMine)
         {
