@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviourPun
             if (PhotonNetwork.IsMasterClient)  // Apenas o Master Client cria o carro
             {
                 // Instancia o carro via PhotonNetwork, sincronizando para todos os jogadores
-                PhotonNetwork.Instantiate(carPrefab.name, (Vector2)spawnPoint.position, spawnPoint.rotation);
+                //PhotonNetwork.Instantiate(carPrefab.name, (Vector2)spawnPoint.position, spawnPoint.rotation);
                 // Atualiza a Cinemachine para seguir o carro instanciado
                 virtualCamera.Follow = carPrefab.transform;
                 virtualCamera.LookAt = carPrefab.transform.Find("LookAtPoint"); 

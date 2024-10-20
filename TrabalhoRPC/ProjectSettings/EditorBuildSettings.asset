@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 3ae762bcece190140baaf1da9f7d6055
   - enabled: 1
-    path: Assets/Scenes/SalaDeEspera.unity
-    guid: 85c194d1145c00c4b81cfd8b01e6dbc9
+    path: Assets/Scenes/WaitingRoom.unity
+    guid: 40a451bac61dd434c886bc41a8a084ad
   - enabled: 1
     path: Assets/Scenes/Jogo.unity
     guid: 4dbed04b25a593947ba9962951c233a6

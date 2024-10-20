@@ -12,7 +12,7 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
     public GameObject startGameButton; // Botão para o Master Client iniciar o jogo
     public GameObject LeaveLobbyButton; // Bitçao para sair do lobby
     public TMP_Text roomNameText;  // Referência ao TMP_Text para mostrar o nome da sala
-
+    private MapType selectedMap = MapType.Jogo;
 
     // Start is called before the first frame update
     void Start()
@@ -75,16 +75,19 @@ public class WaitingRoomManager : MonoBehaviourPunCallbacks
             }
 
             // Chama o RPC para iniciar o jogo
-            photonView.RPC("gameStart", RpcTarget.All); // Passa o mapa selecionado
+            photonView.RPC("gameStart", RpcTarget.All, (int)selectedMap); // Passa o mapa selecionado
         }
     }
 
     //É chamado pelo startGame para mudar a cena de todos para o mapa escolhido
     [PunRPC]
-    public void gameStart()
+    public void gameStart(int mapindex)
     {
         // Carrega o mapa selecionado
-        PhotonNetwork.LoadLevel("Jogo");
-        photonView.RPC("ShowGameStartText", RpcTarget.All);
+        PhotonNetwork.LoadLevel("Jogo");     
+    }
+    public enum MapType
+    {
+        Jogo
     }
 }
