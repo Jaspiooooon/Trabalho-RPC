@@ -35,7 +35,7 @@ public class CarController : MonoBehaviour
     {
         // Capturando o input do eixo Horizontal e Vertical
         movement.x = Input.GetAxis("Horizontal");  // Para os lados
-        movement.y = Mathf.Clamp(Input.GetAxis("Vertical"), -1, 1);
+        movement.y = Input.GetAxis("Vertical");
     }
     public void Move()
     {
@@ -56,12 +56,13 @@ public class CarController : MonoBehaviour
 
         // Rotacionando o carro
         rb.MoveRotation(rb.rotation - movement.x * turnSpeed * Time.fixedDeltaTime);  // Gira de acordo com o input horizontal
-        photonView.RPC("MoveRPC", RpcTarget.All);
+        photonView.RPC("MoveRPC", RpcTarget.All,movement.x, movement.y);
     }
     [PunRPC]
-    public void MoveRPC()
+    public void MoveRPC(float Horizontal, float Vertical)
     {
-
+        Vector2 Movemant = new Vector2(Horizontal, Vertical);
+        rb.velocity = Movemant * currentSpeed;
     }
 
     void FixedUpdate()
