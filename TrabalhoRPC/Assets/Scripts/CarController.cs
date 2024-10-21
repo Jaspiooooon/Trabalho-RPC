@@ -5,7 +5,7 @@ using Photon.Pun;
 using Cinemachine;
 public class CarController : MonoBehaviour
 {
-    float turnSpeed = 50f;
+    float turnSpeed = 120f;
     private Rigidbody2D rb;         // Referência ao Rigidbody2D
     private Vector2 movement;       // Direção do movimento
     public float maxSpeed = 20f;    // Velocidade máxima
